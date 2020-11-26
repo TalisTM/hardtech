@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/page/categoria.dart';
+import 'package:hardtech/page/get_dados.dart';
 import 'package:hardtech/page/home.dart';
 import 'package:hardtech/page/perfil.dart';
 
 void main() => runApp(
   MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Home(),
+    home: GetDados(),
     theme: ThemeData(
       appBarTheme: AppBarTheme(
         centerTitle: true,

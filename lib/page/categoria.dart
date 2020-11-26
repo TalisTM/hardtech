@@ -58,12 +58,12 @@ class _CategoriaState extends State<Categoria> {
               child: Text(text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600
                 ),
               ),
             ),
-            Icon(Icons.arrow_forward_ios, color: Colors.white,)
+            Icon(Icons.arrow_forward_ios, color: Colors.white)
           ],
         )
       ),

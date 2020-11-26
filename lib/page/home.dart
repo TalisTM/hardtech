@@ -1,9 +1,7 @@
-// import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/bottom_bar.dart';
 import 'package:hardtech/components/card_item.dart';
-import 'package:hardtech/components/loading.dart';
-// import 'package:http/http.dart' as http;
+import 'package:hardtech/page/get_dados.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,19 +9,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  // Future<List> _getDados() async {
-  //   http.Response response;
-  //   response = await http.get("https://talismarchioro.wixsite.com/my-site/_functions/produtos");
-
-  //   return jsonDecode(response.body);
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getDados();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,35 +21,11 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            FutureBuilder(
-              future: produtos,
-              builder: (context, snapshot){
-                switch (snapshot.connectionState){
-                  case ConnectionState.waiting:
-                  case ConnectionState.none:
-                    return Loading();
-                  
-                  default:
-                    if(snapshot.hasError) {
-                      return Container(
-                        child: Center(
-                          child: Text("Erro"),
-                        ),
-                      );
-                    } else {
-                      return Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            child: Image.asset("assets/img_inicio.jpeg"),
-                          ),
-                          _bulderList(context, snapshot)
-                        ],
-                      );
-                    }
-                }
-              },
-            )
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Image.asset("assets/img_inicio.jpeg"),
+            ),
+            _bulderList(context)
           ],
         ),
       ),
@@ -72,13 +33,13 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _bulderList(BuildContext context, AsyncSnapshot snapshot){
+  Widget _bulderList(BuildContext context){
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: snapshot.data.length,
+      itemCount: produtos.length,
       itemBuilder: (context, index){
-        return CardItem(snapshot.data[index]);
+        return CardItem(produtos[index]);
       },
     );
   }

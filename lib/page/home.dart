@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/bottom_bar.dart';
-import 'package:hardtech/components/card_item.dart';
-import 'package:hardtech/page/get_dados.dart';
+import 'package:hardtech/components/builder_list.dart';
+import 'package:hardtech/page/filtro.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,32 +15,24 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("HardTech"),
-        actions: [
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Image.asset("assets/img_inicio.jpeg"),
+            GestureDetector(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Image.asset("assets/img_inicio.jpeg"),
+              ),
+              onTap: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Filtro("Placa de Vídeo" , "placa-video")));
+              },
             ),
-            _bulderList(context)
+            BuilderList(count: 8)
           ],
         ),
       ),
       bottomNavigationBar: BottomBar()
-    );
-  }
-
-  Widget _bulderList(BuildContext context){
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: produtos.length,
-      itemBuilder: (context, index){
-        return CardItem(produtos[index]);
-      },
     );
   }
 }

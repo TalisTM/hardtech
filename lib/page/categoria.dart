@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/bottom_bar.dart';
+import 'package:hardtech/page/filtro.dart';
 
 class Categoria extends StatefulWidget {
   @override
@@ -27,13 +28,13 @@ class _CategoriaState extends State<Categoria> {
               ),
             ),
             SizedBox(height: 10),
-            _box("Processador"),
-            _box("Placa-Mãe"),
-            _box("Memória Ram"),
-            _box("Placa de Vídeo"),
-            _box("Fonte"),
-            _box("SSD"),
-            _box("Gabinete"),
+            _box("Processador", "processador"),
+            _box("Placa-Mãe", "placa-mae"),
+            _box("Memória Ram", "ram"),
+            _box("Placa de Vídeo", "placa-video"),
+            _box("Fonte", "fonte"),
+            _box("SSD", "ssd"),
+            _box("Gabinete", "gabinete"),
           ],
         ),
       ),
@@ -41,9 +42,11 @@ class _CategoriaState extends State<Categoria> {
     );
   }
 
-  Widget _box(String text){
+  Widget _box(String text, String tipo){
     return GestureDetector(
-      //onTap: ,
+      onTap: (){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Filtro(text ,tipo)));
+      },
       child: Container(
         margin: EdgeInsets.all(5),
         padding: EdgeInsets.all(25),

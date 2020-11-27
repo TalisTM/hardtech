@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hardtech/components/builder_list.dart';
 
 class Filtro extends StatelessWidget {
-  
+
   final String text;
   final String tipo;
 

@@ -29,6 +29,15 @@ class _HomeState extends State<Home> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Filtro("Placa de Vídeo" , "placa-video")));
               },
             ),
+            SizedBox(height: 10),
+            Text("DESTAQUES:",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+            SizedBox(height: 10),
             BuilderList(count: 8)
           ],
         ),

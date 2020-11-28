@@ -23,10 +23,10 @@ class _HomeState extends State<Home> {
             GestureDetector(
               child: Container(
                 padding: EdgeInsets.all(10),
-                child: Image.asset("assets/img_inicio.jpeg"),
+                child: Image.asset("assets/images/img_inicio.jpeg"),
               ),
               onTap: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Filtro("Placa de Vídeo" , "placa-video")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Filtro("Placa de Vídeo" , "placa-video")));
               },
             ),
             BuilderList(count: 8)

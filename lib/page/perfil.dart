@@ -14,7 +14,21 @@ class _PerfilState extends State<Perfil> {
         automaticallyImplyLeading: false,
         title: Text("Perfil"),
       ),
-      //body: ,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(height: 20),
+          Text("Em breve...\nAinda em desenvolvimento",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w600
+            ),
+          ),
+          SizedBox(height: 20),
+          Image.asset("assets/images/dev.png")
+        ],
+      ),
       bottomNavigationBar: BottomBar(),
     );
   }

@@ -54,7 +54,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                     content: Text("Isso é só o app do trabalho, da pra comprar não man"),
                     actions: [
                       FlatButton(
-                        child: Text("foi mal", style: TextStyle(color: Colors.green[700])),
+                        child: Text("Foi mal", style: TextStyle(color: Colors.green[700])),
                         onPressed: () => Navigator.pop(context),
                       )
                     ],
@@ -72,11 +72,11 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                 return showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text("Ta loko?"),
+                    title: Text("De novo?"),
                     content: Text("Isso é só o app do trabalho, da pra comprar não man"),
                     actions: [
                       FlatButton(
-                        child: Text("foi mal", style: TextStyle(color: Colors.green[700])),
+                        child: Text("Vacilei", style: TextStyle(color: Colors.green[700])),
                         onPressed: () => Navigator.pop(context),
                       )
                     ],
@@ -127,9 +127,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
       padding: EdgeInsets.all(5),
       height: 300,
       child: Row(
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Icon(Icons.arrow_back_ios),
           IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () => _pageController.previousPage(duration: Duration(microseconds: 1), curve: Curves.bounceIn),

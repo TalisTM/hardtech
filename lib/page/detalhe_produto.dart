@@ -16,41 +16,15 @@ class _DetalheProdutoState extends State<DetalheProduto> {
 
   @override
   Widget build(BuildContext context) {
-    Map produto = widget.produto;
-    
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Detalhes do Produto"),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => Navigator.pushNamed(context, "/inicio"),
-        ),
-      ),
+      appBar: _builderAppBar(),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 3),
-                borderRadius: BorderRadius.circular(10)
-              ),
-              margin: EdgeInsets.only(bottom: 10),
-              height: 300,
-              child: PageView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: _pageController,
-                itemCount: produto["imagem"].length,
-                itemBuilder: (_ , int index){
-                  return Container(
-                    child: Image.network(produto["imagem"][index]),
-                  );
-                },
-              ),
-            ),
-            Text(produto["nome"],
+            _builderImages(),
+            Text(widget.produto["nome"],
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
@@ -58,7 +32,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
               ),
             ),
             SizedBox(height: 15),
-            Text("R\$ ${produto["preco"].toStringAsFixed(2).replaceAll(".", ",")}",
+            Text("R\$ ${widget.produto["preco"].toStringAsFixed(2).replaceAll(".", ",")}",
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 30,
@@ -119,7 +93,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
               ),
             ),
             SizedBox(height: 20),
-            Text(produto["especificacoes"],
+            Text(widget.produto["especificacoes"],
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 18,
@@ -128,6 +102,62 @@ class _DetalheProdutoState extends State<DetalheProduto> {
             SizedBox(height: 20)
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _builderAppBar() {
+    return AppBar(
+      title: Text("Detalhes do Produto"),
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+        onPressed: () => Navigator.pushNamed(context, "/inicio"),
+      ),
+    );
+  }
+
+  Widget _builderImages() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey, width: 3),
+        borderRadius: BorderRadius.circular(10)
+      ),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(5),
+      height: 300,
+      child: Row(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          //Icon(Icons.arrow_back_ios),
+          IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () => _pageController.previousPage(duration: Duration(microseconds: 1), curve: Curves.bounceIn),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              
+              controller: _pageController,
+              itemCount: widget.produto["imagem"].length,
+              itemBuilder: (_ , int index){
+                return Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.network(widget.produto["imagem"][index], height: 200, width: 270,),
+                    ],
+                  )
+                );
+              },
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.arrow_forward_ios),
+            onPressed: () => _pageController.nextPage(duration: Duration(microseconds: 1), curve: Curves.bounceIn),
+          )
+        ],
       ),
     );
   }

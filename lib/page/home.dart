@@ -33,12 +33,14 @@ class _HomeState extends State<Home> {
             Text("DESTAQUES:",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w700
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.green[800]
               ),
             ),
             SizedBox(height: 10),
-            BuilderList(count: 8)
+            BuilderList(count: 8),
+            SizedBox(height: 10)
           ],
         ),
       ),

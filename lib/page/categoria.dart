@@ -23,8 +23,9 @@ class _CategoriaState extends State<Categoria> {
             Text("ESCOLHA UMA OPÇÃO:",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w700
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.green[800]
               ),
             ),
             SizedBox(height: 10),
@@ -61,8 +62,8 @@ class _CategoriaState extends State<Categoria> {
               child: Text(text,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

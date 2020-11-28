@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hardtech/components/builder_pageview.dart';
-import 'package:hardtech/page/get_dados.dart';
 
 class DetalheProduto extends StatefulWidget {
   
@@ -9,30 +7,12 @@ class DetalheProduto extends StatefulWidget {
   DetalheProduto(this.produto);
 
   @override
-  _Detalhe_produtoState createState() => _Detalhe_produtoState();
+  _DetalheProdutoState createState() => _DetalheProdutoState();
 }
 
-class _Detalhe_produtoState extends State<DetalheProduto> {
+class _DetalheProdutoState extends State<DetalheProduto> {
   
   final PageController _pageController = PageController();
-  int _currentPage;
-
-  Map produto;
-
-  @override
-  void initState() {
-    _pageController.addListener(() {
-      int next = _pageController.page.round();
-      if (_currentPage != null) {
-        setState(() {
-          _currentPage = next;
-        });
-      }
-    });
-
-    produto = widget.produto;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,40 +22,30 @@ class _Detalhe_produtoState extends State<DetalheProduto> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushNamed(context, "/inicio"),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            PageView.builder(
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.green[800], width: 4),
+              borderRadius: BorderRadius.circular(10)
+            ),
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            height: 300,
+            child: PageView.builder(
+              scrollDirection: Axis.horizontal,
               controller: _pageController,
-              itemCount: produtos.length,
+              itemCount: widget.produto["imagem"].length,
               itemBuilder: (_ , int index){
-                bool activePage = index == _currentPage;
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text("Detalhes do Produto"),
-                    leading: IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                  body: Column(
-                    children: [
-                      Container(
-                        child: BuilderPageView(
-                          activePage: activePage,
-                          imagem: produto["imagem"][index]
-                        ),
-                      )
-                    ],
-                  ),
+                return Container(
+                  child: Image.network(widget.produto["imagem"][index]),
                 );
               },
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -11,7 +11,7 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetalheProduto(produto)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetalheProduto(produto)));
       },
       child: Container(
         margin: EdgeInsets.all(5),

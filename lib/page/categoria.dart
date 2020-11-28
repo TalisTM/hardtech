@@ -45,7 +45,7 @@ class _CategoriaState extends State<Categoria> {
   Widget _box(String text, String tipo){
     return GestureDetector(
       onTap: (){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Filtro(text ,tipo)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Filtro(text ,tipo)));
       },
       child: Container(
         margin: EdgeInsets.all(5),

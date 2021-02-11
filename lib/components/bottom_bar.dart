@@ -14,7 +14,6 @@ class _BottomBarState extends State<BottomBar> {
     return BottomNavigationBar(
       currentIndex: op,
       fixedColor: Colors.green[800],
-      //backgroundColor: Colors.green,
       onTap: (escolha){
         if(escolha == 0){
           Navigator.pushNamed(context, "/categoria");
@@ -37,15 +36,15 @@ class _BottomBarState extends State<BottomBar> {
         BottomNavigationBarItem(
           backgroundColor: Colors.red,
           icon: Icon(Icons.list),
-          title: Text("Categoria"),
+          label: "Categoria"
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home,),
-          title: Text("Inicio", )
+          label: "Inicio"
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text("Perfil")
+          label: "Perfil"
         ),
       ],
     );

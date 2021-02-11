@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/card_item.dart';
 import '../main.dart';
 import 'detalhe_produto.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -44,17 +43,10 @@ class _CarrinhoState extends State<Carrinho> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text("ITENS:",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.green[800]
-              ),
-            ),
+            _listTileBuilder("itens", Icons.list_alt),
             ListView.builder(
               itemCount: carrinho.length,
               primary: false,
@@ -64,76 +56,72 @@ class _CarrinhoState extends State<Carrinho> {
                 return _itemCarrinho(carrinho[index], index);
               },
             ),
-            SizedBox(height: 10),
-            Text("TOTAL: R\$ ${total.toStringAsFixed(2)}",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.green[800]
-              ),
-            ),
-            SizedBox(height: 20),
-            Text("FORMA DE PAGAMENTO:",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.green[800]
-              ),
-            ),
+            SizedBox(height: 5),
+            _divisor(),
+            _listTileBuilder("TOTAL: R\$ ${total.toStringAsFixed(2)}", Icons.money_rounded),
+            _divisor(),
+            _listTileBuilder("formas de pagamento", Icons.payment),
             _radioBuilderPagamento("Cartão de Crédito"),
             _radioBuilderPagamento("Cartão de Débito"),
-            _radioBuilderPagamento("Cartão de Boleto"),
+            _radioBuilderPagamento("Boleto"),
             _radioBuilderPagamento("Pix"),
-            SizedBox(height: 20),
-            Text("INSIRA SEU CEP:",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.green[800]
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.green[800])
-              ),
-              child: TextField(
-                controller: cep,
-                onChanged: (_) {
-                  setState(() {});
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "00000-000",
-                  labelText: "CEP",
-                  labelStyle: TextStyle(color: Colors.green[900])
-                ),
-              ),
-            ),
+            SizedBox(height: 5),
+            _divisor(),
+            _listTileBuilder("insira seu cep", Icons.location_on_outlined),
+            _inserirCep(),
             cep.text.toString().length == 9 ? _entrega() : SizedBox(),
-            SizedBox(height: 10),
-            RaisedButton(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Text("FINALIZAR COMPRA", style: TextStyle(color: Colors.white)),
-              color: Colors.green[700],
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-              onPressed: () {},
-            ),
+            _botaoComprar(),
           ],
         ),
       )
     );
   }
 
+  Widget _listTileBuilder(String title, IconData icon) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+      title: Text(
+        title.toUpperCase(),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700,)
+      ),
+      leading: Icon(icon, color: Colors.black, size: 27),
+    );
+  }
+
+  Widget _inserirCep() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.green[800])
+      ),
+      child: TextField(
+        controller: cep,
+        onChanged: (_) {
+          setState(() {});
+        },
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "00000-000",
+          labelText: "CEP",
+          labelStyle: TextStyle(color: Colors.green[900])
+        ),
+      ),
+    );
+  }
+
+  Widget _divisor() {
+    return Container(
+      height: 10,
+      color: Colors.grey,
+    );
+  }
+
   Widget _radioBuilderPagamento(String forma) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -155,7 +143,7 @@ class _CarrinhoState extends State<Carrinho> {
 
   Widget _radioBuilderEntrega(String forma) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -179,14 +167,8 @@ class _CarrinhoState extends State<Carrinho> {
     return Column(
       children: [
         SizedBox(height: 10),
-        Text("FORMA DE ENTREGA:",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.green[800]
-              ),
-            ),
+        _divisor(),
+        _listTileBuilder("formas de entrega", Icons.local_shipping_outlined),
         _radioBuilderEntrega("PAC - R\$ 23,80"),
         _radioBuilderEntrega("Sedex - R\$ 41,99"),
         _radioBuilderEntrega("FastLog - R\$ 18,90"),
@@ -231,7 +213,7 @@ class _CarrinhoState extends State<Carrinho> {
       );
     },
     child: Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -263,4 +245,17 @@ class _CarrinhoState extends State<Carrinho> {
     ),
   );
 }
+
+  Widget _botaoComprar() {
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: RaisedButton(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: Text("FINALIZAR COMPRA", style: TextStyle(color: Colors.white)),
+        color: Colors.green[700],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        onPressed: () {},
+      ),
+    );
+  }
 }

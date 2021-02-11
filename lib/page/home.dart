@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/bottom_bar.dart';
 import 'package:hardtech/components/builder_list.dart';
+import 'package:hardtech/components/floating_card.dart';
 import 'package:hardtech/page/filtro.dart';
 
 class Home extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(10),
                 child: Image.asset("assets/images/img_inicio.jpeg"),
               ),
-              onTap: (){
+              onTap: () async {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Filtro("Placa de Vídeo" , "placa-video")));
               },
             ),
@@ -44,7 +45,8 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar()
+      bottomNavigationBar: BottomBar(),
+      floatingActionButton: FloatingCard(),
     );
   }
 }

@@ -36,7 +36,6 @@ class _GetDadosState extends State<GetDados> {
           case ConnectionState.waiting:
           case ConnectionState.none:
             return Loading();
-
           default:
             if(snapshot.hasError){
               return Error();

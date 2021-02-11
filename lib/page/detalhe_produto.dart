@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hardtech/components/floating_card.dart';
+import '../main.dart';
 
 class DetalheProduto extends StatefulWidget {
   
@@ -43,44 +45,34 @@ class _DetalheProdutoState extends State<DetalheProduto> {
             SizedBox(height: 30),
             RaisedButton(
               padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text("COMPRAR" , style: TextStyle(color: Colors.white)),
+              child: Text("COMPRAR", style: TextStyle(color: Colors.white)),
               color: Colors.green[700],
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               onPressed: () {
-                return showDialog(
+                carrinho.add(widget.produto);
+                setState(() {});
+                showDialog(
                   context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text("Ta loko?"),
-                    content: Text("Isso é só o app do trabalho, da pra comprar não man"),
-                    actions: [
-                      FlatButton(
-                        child: Text("Foi mal", style: TextStyle(color: Colors.green[700])),
-                        onPressed: () => Navigator.pop(context),
-                      )
-                    ],
-                  )
-                );
-              },
-            ),
-            SizedBox(height: 10),
-            RaisedButton(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text("ADICIONAR AO CARRINHO" , style: TextStyle(color: Colors.white)),
-              color: Colors.green[500],
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-              onPressed: () {
-                return showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text("De novo?"),
-                    content: Text("Isso é só o app do trabalho, da pra comprar não man"),
-                    actions: [
-                      FlatButton(
-                        child: Text("Vacilei", style: TextStyle(color: Colors.green[700])),
-                        onPressed: () => Navigator.pop(context),
-                      )
-                    ],
-                  )
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("O produto foi adicionado ao carrinho"),
+                      actions: [
+                        FlatButton(
+                          child: Text("Continuar comprando", style: TextStyle(color: Colors.green[800])),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("ir ao carrinho", style: TextStyle(color: Colors.green[800])),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, "/carrinho");
+                          },
+                        ),
+                      ],
+                    );
+                  }
                 );
               },
             ),
@@ -103,6 +95,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
           ],
         ),
       ),
+      floatingActionButton: FloatingCard(),
     );
   }
 

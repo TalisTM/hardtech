@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/bottom_bar.dart';
+import 'package:hardtech/components/floating_card.dart';
 import 'package:hardtech/page/filtro.dart';
 
 class Categoria extends StatefulWidget {
@@ -40,6 +41,7 @@ class _CategoriaState extends State<Categoria> {
         ),
       ),
       bottomNavigationBar: BottomBar(),
+      floatingActionButton: FloatingCard(),
     );
   }
 

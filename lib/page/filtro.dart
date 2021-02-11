@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hardtech/components/builder_list.dart';
+import 'package:hardtech/components/floating_card.dart';
 
 class Filtro extends StatelessWidget {
 
@@ -24,6 +25,7 @@ class Filtro extends StatelessWidget {
       body: SingleChildScrollView(
         child: BuilderList(tipo: tipo),
       ),
+      floatingActionButton: FloatingCard(),
     );
   }
 }
